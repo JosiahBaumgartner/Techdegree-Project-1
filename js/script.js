@@ -3,54 +3,109 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// Study guide for this project - https://drive.google.com/file/d/1s5grutGuQFwJcQP8bFwEI69Q8FCkGdDk/view?usp=sharing
 
 
-/*** 
-  Create the array of quote objects and name it `quotes`.
-  Add at least five quote objects to the `quotes` array.
-  Give each quote object a `quote` and `source` property.
-  Add the `citation` property to at least one object in the array.
-  Add the `year` property to at least one object in the array.
-  Use console.log() to log your array of quotes to the console.
-***/
+// Generates random number 0-7, uses random number to pull random quote object from array.
+function getRandomQuote() {
+   var randomNumber = Math.floor(Math.random() * 8 );
+   return (quotes[randomNumber]);
+}
 
+// Takes the random quote object and builds it into an HTML string before injecting it to the proper id.
+// Also builds a random Hex value and injects the same random color into the body background color and the button color.
+// Also prints a new quote automatically on a 30,000 ms (30s) timer.
 
+var timer = window.setInterval(printQuote, 30000);
+function printQuote() {
 
+  var randomHex = "#" + Math.floor(Math.random() * 999999 )
+  var randomQuote = getRandomQuote();
+  var htmlString = "";
+  htmlString += '<p class="quote">' + randomQuote.quote + '</p>';
+  htmlString += '<p class="source">' + randomQuote.source;
+  if (randomQuote.citation) {
+    htmlString += '<span class="citation">' + randomQuote.citation + '</span>';
+  }
+  if (randomQuote.year) {
+    htmlString += '<span class="year">' + randomQuote.year + '</span>';
+  }
+  if (randomQuote.category) {
+    htmlString += '<br><span> Category:' + randomQuote.category + '</span></p>';
+  }
+  document.getElementById('quote-box').innerHTML = htmlString
+  document.getElementById("body").style.backgroundColor =  randomHex
+  document.getElementById("loadQuote").style.backgroundColor =  randomHex
+}
 
-/***
-  Create the `getRandomQuote` function to:
-   - Create a variable to store a random number 
-   - Cse the random number to `return` a random quote object from the `quotes` array.
-***/
+/*
+Resets the timer
+Used so button press does not cause display of quotes to be <30s
+*/
+function resetTimer() {
+  clearInterval(timer);
+  timer = window.setInterval(printQuote, 30000);
+}
 
+// Array containing all quotes, sources, citations and years. Use as pool to draw random quotes from.
+var quotes = [
+{
+  quote: "Hmmm, yes, a tiny net is a death sentence. It's a net, and it's tiny.",
+  source: "Master Betty",
+  citation: "Kung Pow: Enter the Fist",
+  year: "2002",
+  category: "Movies"
+},
+{
+  quote: "Killing is wrong. And bad. There should be a new, stronger word for killing. Like badwrong, or badong. Yes, killing is badong. From this moment, I will stand for the opposite of killing: gnodab.",
+  source: "The Chosen One",
+  citation: "Kung Pow: Enter the Fist",
+  year: "2002",
+  category: "Movies"
+},
+{
+  quote: "My donkey senses are tingling all over.",
+  source: "Donkey",
+  citation: "Shrek 2",
+  year: "2004",
+  category: "Movies"
+},
+{
+  quote:"In case you haven’t noticed, I'm weird. I’m a weirdo. I don't fit in. And I don't want to fit in. Have you ever seen me without this stupid hat on? That's weird.",
+  source: "Jughead",
+  citation: "Riverdale",
+  year: "2017",
+  category: "Television"
+},
+{
+  quote: "You are my enemy but now you are my friend too",
+  source: "Evil Shadex",
+  citation: "Sonex the Hodgehead",
+  year: "2015"
+},
+{
+  quote: "I believe in freedom and god!",
+  source: "Tail",
+  citation: "Sonex the Hodgehead",
+  year: "2015"
+},
+{
+  quote: "You will no defeat! We will teach you all day!",
+  source: "Sonex",
+  citation: "Sonex the Hodgehead",
+  year: "2015"
+},
+{
+  quote: "I am robot Sonex! You fool Sonex and you cannot defeat robot Sonex!",
+  source: "Dr. Robotnex",
+  citation: "Sonex the Hodgehead",
+  year: "2015"
+},
+];
 
-
-
-/***
-  Create the `printQuote` function to: 
-   - Call the `getRandomQuote` function and assign it to a variable.
-   - Create a variable for the HTML string and set it equal to an empty string.
-   - Use the HTML template in the instructions or the markup in the index.html file, AND 
-     the random quote vairable to build your HTML string.
-   - Add the quote and source section to the HTML string.
-   - Use an if statement to check for the citation property before adding it to the HTML string.
-   - Use an if statement to check for the year property before adding it to the HTML string.
-   - Don't forget to close that final `p` tag.
-   - Set the `innerHTML` of the `quote-box` div to the HTML string. 
-***/
-
-
-
-
-/***
-  When the "Show another quote" button is clicked, the event listener 
-  below will be triggered, and it will call, or "invoke", the `printQuote` 
-  function. So do not make any changes to the line of code below this 
-  comment.
-***/
+/*
+  When the "Show another quote" button is clicked, the event listener
+  below will be triggered, and it will call the `printQuote` and 'resetTimer' functions.
+*/
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+document.getElementById('loadQuote').addEventListener("click", resetTimer, false);
