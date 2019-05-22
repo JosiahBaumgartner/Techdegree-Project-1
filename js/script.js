@@ -3,49 +3,6 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-
-
-// Generates random number 0-7, uses random number to pull random quote object from array.
-function getRandomQuote() {
-   var randomNumber = Math.floor(Math.random() * 8 );
-   return (quotes[randomNumber]);
-}
-
-// Takes the random quote object and builds it into an HTML string before injecting it to the proper id.
-// Also builds a random Hex value and injects the same random color into the body background color and the button color.
-// Also prints a new quote automatically on a 30,000 ms (30s) timer.
-
-var timer = window.setInterval(printQuote, 30000);
-function printQuote() {
-
-  var randomHex = "#" + Math.floor(Math.random() * 999999 )
-  var randomQuote = getRandomQuote();
-  var htmlString = "";
-  htmlString += '<p class="quote">' + randomQuote.quote + '</p>';
-  htmlString += '<p class="source">' + randomQuote.source;
-  if (randomQuote.citation) {
-    htmlString += '<span class="citation">' + randomQuote.citation + '</span>';
-  }
-  if (randomQuote.year) {
-    htmlString += '<span class="year">' + randomQuote.year + '</span>';
-  }
-  if (randomQuote.category) {
-    htmlString += '<br><span> Category:' + randomQuote.category + '</span></p>';
-  }
-  document.getElementById('quote-box').innerHTML = htmlString
-  document.getElementById("body").style.backgroundColor =  randomHex
-  document.getElementById("loadQuote").style.backgroundColor =  randomHex
-}
-
-/*
-Resets the timer
-Used so button press does not cause display of quotes to be <30s
-*/
-function resetTimer() {
-  clearInterval(timer);
-  timer = window.setInterval(printQuote, 30000);
-}
-
 // Array containing all quotes, sources, citations and years. Use as pool to draw random quotes from.
 var quotes = [
 {
@@ -101,6 +58,50 @@ var quotes = [
   year: "2015"
 },
 ];
+
+// Generates random number 0-7, uses random number to pull random quote object from array.
+function getRandomQuote() {
+   var randomNumber = Math.floor(Math.random() * 8 );
+   return (quotes[randomNumber]);
+}
+
+/*
+  Resets the timer
+  Used so button press does not cause display of quotes to be <30s
+*/
+function resetTimer() {
+  clearInterval(timer);
+  timer = window.setInterval(printQuote, 30000);
+}
+
+/*
+  Takes the random quote object and builds it into an HTML string before injecting it to the proper id.
+  Also builds a random Hex value and injects the same random color into the body background color and the button color.
+  Also prints a new quote automatically on a 30,000 ms (30s) timer.
+*/
+
+var timer = window.setInterval(printQuote, 30000);
+function printQuote() {
+
+  var randomHex = "#" + Math.floor(Math.random() * 999999 )
+  var randomQuote = getRandomQuote();
+  var htmlString = "";
+  htmlString += '<p class="quote">' + randomQuote.quote + '</p>';
+  htmlString += '<p class="source">' + randomQuote.source;
+  if (randomQuote.citation) {
+    htmlString += '<span class="citation">' + randomQuote.citation + '</span>';
+  }
+  if (randomQuote.year) {
+    htmlString += '<span class="year">' + randomQuote.year + '</span>';
+  }
+  if (randomQuote.category) {
+    htmlString += '<br><span> Category:' + randomQuote.category + '</span></p>';
+  }
+  document.getElementById('quote-box').innerHTML = htmlString
+  document.getElementById("body").style.backgroundColor =  randomHex
+  document.getElementById("loadQuote").style.backgroundColor =  randomHex
+  resetTimer();
+}
 
 /*
   When the "Show another quote" button is clicked, the event listener
