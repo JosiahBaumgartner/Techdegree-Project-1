@@ -109,4 +109,3 @@ function printQuote() {
 */
 
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-document.getElementById('loadQuote').addEventListener("click", resetTimer, false);
