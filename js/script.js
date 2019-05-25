@@ -84,9 +84,9 @@ const resetTimer = () => {
 */
 const printQuote = () => {
 
-  var randomHex = "#" + Math.floor(Math.random() * 999999 )
-  var randomQuote = getRandomQuote();
-  var htmlString = "";
+  const randomHex = "#" + Math.floor(Math.random() * 999999 )
+  const randomQuote = getRandomQuote();
+  let htmlString = "";
   htmlString += '<p class="quote">' + randomQuote.quote + '</p>';
   htmlString += '<p class="source">' + randomQuote.source;
   if (randomQuote.citation) {
