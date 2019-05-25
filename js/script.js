@@ -3,9 +3,6 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// Timer variable to load new quote with printQuote() every 30s
-const timer = window.setInterval(printQuote, 30000);
-
 // Array containing all quotes, sources, citations and years. Use as pool to draw random quotes from.
 const quotes = [
 {
@@ -62,6 +59,9 @@ const quotes = [
 },
 ];
 
+// Timer variable to load new quote with printQuote() every 30s
+const timer = window.setInterval(printQuote, 30000);
+
 // Generates random number 0-7, uses random number to pull random quote object from array.
 const getRandomQuote = () => {
    let randomNumber = Math.floor(Math.random() * 8 );
@@ -83,7 +83,6 @@ const resetTimer = () => {
   Resets timer by means of resetTimer() when this funtion is run (after button press or timer ends)
 */
 const printQuote = () => {
-
   const randomHex = "#" + Math.floor(Math.random() * 999999 )
   const randomQuote = getRandomQuote();
   let htmlString = "";
