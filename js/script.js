@@ -3,8 +3,11 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
+// Timer variable to load new quote with printQuote() every 30s
+const timer = window.setInterval(printQuote, 30000);
+
 // Array containing all quotes, sources, citations and years. Use as pool to draw random quotes from.
-var quotes = [
+const quotes = [
 {
   quote: "Hmmm, yes, a tiny net is a death sentence. It's a net, and it's tiny.",
   source: "Master Betty",
@@ -60,8 +63,8 @@ var quotes = [
 ];
 
 // Generates random number 0-7, uses random number to pull random quote object from array.
-function getRandomQuote() {
-   var randomNumber = Math.floor(Math.random() * 8 );
+const getRandomQuote = () => {
+   let randomNumber = Math.floor(Math.random() * 8 );
    return (quotes[randomNumber]);
 }
 
@@ -69,19 +72,17 @@ function getRandomQuote() {
   Resets the timer
   Used so button press does not cause display of quotes to be <30s
 */
-function resetTimer() {
+const resetTimer = () => {
   clearInterval(timer);
   timer = window.setInterval(printQuote, 30000);
 }
 
 /*
   Takes the random quote object and builds it into an HTML string before injecting it to the proper id.
-  Also builds a random Hex value and injects the same random color into the body background color and the button color.
-  Also prints a new quote automatically on a 30,000 ms (30s) timer.
+  Builds a random Hex value and injects the same random color into the body background color and the button color.
+  Resets timer by means of resetTimer() when this funtion is run (after button press or timer ends)
 */
-
-var timer = window.setInterval(printQuote, 30000);
-function printQuote() {
+const printQuote = () => {
 
   var randomHex = "#" + Math.floor(Math.random() * 999999 )
   var randomQuote = getRandomQuote();
@@ -105,7 +106,6 @@ function printQuote() {
 
 /*
   When the "Show another quote" button is clicked, the event listener
-  below will be triggered, and it will call the `printQuote` and 'resetTimer' functions.
+  below will be triggered, and it will call the `printQuote` function.
 */
-
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
