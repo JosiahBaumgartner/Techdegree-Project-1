@@ -82,7 +82,7 @@ const resetTimer = () => {
   Builds a random Hex value and injects the same random color into the body background color and the button color.
   Resets timer by means of resetTimer() when this funtion is run (after button press or timer ends)
 */
-const printQuote = () => {
+function printQuote() {
   const randomHex = "#" + Math.floor(Math.random() * 999999 )
   const randomQuote = getRandomQuote();
   let htmlString = "";
