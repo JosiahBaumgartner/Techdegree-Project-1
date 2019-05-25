@@ -60,7 +60,7 @@ const quotes = [
 ];
 
 // Timer variable to load new quote with printQuote() every 30s
-const timer = window.setInterval(printQuote, 30000);
+let timer = window.setInterval(printQuote, 30000);
 
 // Generates random number 0-7, uses random number to pull random quote object from array.
 const getRandomQuote = () => {
